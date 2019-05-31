@@ -77,8 +77,8 @@ namespace POneIntf.BLL
                             Runtime.CurrentUser = this.req.data.username;
 
                             dtUser.Rows[0]["TempPsw"] = "";
-                            dtUser.Rows[0]["Status"] = "A";
-                            CRUD_o1.Update<Model.M_Sys_Login_Account>(dtUser.Rows[0], "UserId");
+                            dtUser.Rows[0]["Status"] = "A";                            
+                            UpdateLoginAccount(dtUser.Rows[0]);
                         }
                         break;
                 }
@@ -93,6 +93,22 @@ namespace POneIntf.BLL
         }
 
         #endregion
+
+        private void UpdateLoginAccount(DataRow dr)
+        {
+            CRUD biz = new CRUD(DbVendor.Oracle, Runtime.OracleConnStrLocal, true);
+            try
+            {
+                biz.Update<Model.M_Sys_Login_Account>(dr, "UserId");
+                biz.Commit();
+            }
+            catch (Exception err)
+            {
+                biz.Abort();
+                throw err;
+            }
+
+        }
 
         private DataTable GetUserInfo()
         {
