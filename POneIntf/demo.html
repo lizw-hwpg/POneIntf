@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- jquery -->
+<script type="text/javascript" s src="vendor/jquery-1.12.4.js"></script>    
+<!-- bootstrap-->
+<link rel="Stylesheet" href="vendor/bootstrap-4.3.1/css/bootstrap.min.css" />
+<script type="text/javascript" src="vendor/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<!-- vue.js-->    
+<script type="text/javascript" src="vendor/vue/vue.min.js"></script>
+<title>Demo</title>
+</head>
+<body>
+    <div class="d-flex">        
+        <ul class="nav nav-tabs flex-column" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="basic-tab" data-toggle="tab" href="#logincheck" role="tab" aria-controls="home" aria-selected="true">用户登录校验</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="advanced-tab" data-toggle="tab" href="#forgetpsw" role="tab" aria-controls="advanced" aria-selected="false">用户忘记密码</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="other-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="other" aria-selected="false">Others</a>
+            </li>
+        </ul>
+        <div class="tab-content p-2" id="myTabContent">
+            <div class="tab-pane fade show active" id="logincheck" role="tabpanel" aria-labelledby="logincheck-tab">
+                <div class="form-group">
+                    <label for="username">UserId</label>
+                    <input type="text" class="form-control param" placeholder="User Id" alt="username" value="HUHS00639">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control param" placeholder="Password" alt="password" value="123456">
+                </div>
+                <div class="form-group">
+                    <label for="logintype">类型</label>
+                    <select name="ddlLoginType" class="form-control param" alt="logintype">
+                        <option value="S">系统管理用户</option>
+                        <option value="L">租约用户</option>
+                        <option value="C" selected="selected">账号用户</option>
+                        <option value="E">查询</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary">3.1_LoginCheck</button>  
+            </div>
+            <div class="tab-pane fade" id="forgetpsw" role="tabpanel" aria-labelledby="forgetpsw-tab">
+                <div class="form-group">
+                    <label for="username">UserId</label>
+                    <input type="text" class="form-control param" placeholder="User Id" alt="userid" value="HUHS00639">
+                </div>
+                <div class="form-group">
+                    <label for="logintype">类型</label>
+                    <select name="ddlLoginType" class="form-control param" alt="logintype">
+                        <option value="S">系统管理用户</option>
+                        <option value="L">租约用户</option>
+                        <option value="C" selected="selected">账号用户</option>
+                        <option value="E">查询</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary">3.2_ForgetPsw</button>  
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="other-tab">...</div>
+        </div>
+        <div id="result" class="p-4" style="width:400px;">result</div>
+    </div>
+
+    <script type="text/javascript">
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $("#result").html(""); //清空结果区域
+        });
+
+        $(".btn").on("click", function () {
+            $("#result").html(""); //清空结果区域
+            var btnObj = this;
+            btnObj.setAttribute("disabled", ""); //禁用按钮            
+
+            var req = {};
+            req["from"] = "sender";
+            req["timestamp"] = (new Date()).toLocaleString();
+            req["nonce"] = Math.floor(Math.random() * Math.floor(99));
+            req["sign"] = ""; //暂不实现
+            var act = this.parentElement.id;
+            var data = {};
+            $("#" + act + " .param").each(function () { //取当前按钮业务下的所有参数
+                data[this.getAttribute("alt")] = this.value;
+            });
+            req["data"] = data;           
+            //发起ajax请求，完成业务提交
+            $.ajax({
+                url: "gear.ashx?act=" + act,
+                method: "POST",
+                contentType: "application/json; charset=UTF-8",
+                data: JSON.stringify(req),
+                dataType: "json",
+                success: function (response) {
+                    btnObj.removeAttribute("disabled");
+                    if (act == "logincheck") {
+
+                    }
+                    $("#result").html(response.code + ":" + response.msg + "<br/>" + response.raw);
+                },
+                error: function (xhr, status, error) {
+                    btnObj.removeAttribute("disabled");
+                    $("#result").html("ajax failure" + status);
+                }
+            });
+        });
+
+       
+    </script>
+</body>
+</html>

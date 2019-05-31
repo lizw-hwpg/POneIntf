@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8EBE1E38-5AEA-46CE-82DF-28AB40F5D88C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POneIntf</RootNamespace>
+    <AssemblyName>POneIntf</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="demo.html" />
+    <Content Include="vendor\bootstrap-4.3.1\css\bootstrap-grid.css" />
+    <Content Include="vendor\bootstrap-4.3.1\css\bootstrap-grid.min.css" />
+    <Content Include="vendor\bootstrap-4.3.1\css\bootstrap-reboot.css" />
+    <Content Include="vendor\bootstrap-4.3.1\css\bootstrap-reboot.min.css" />
+    <Content Include="vendor\bootstrap-4.3.1\css\bootstrap.css" />
+    <Content Include="vendor\bootstrap-4.3.1\css\bootstrap.min.css" />
+    <Content Include="vendor\bootstrap-4.3.1\js\bootstrap.bundle.js" />
+    <Content Include="vendor\bootstrap-4.3.1\js\bootstrap.bundle.min.js" />
+    <Content Include="vendor\bootstrap-4.3.1\js\bootstrap.js" />
+    <Content Include="vendor\bootstrap-4.3.1\js\bootstrap.min.js" />
+    <Content Include="vendor\jquery-1.12.4.js" />
+    <Content Include="vendor\vue\vue-resource.min.js" />
+    <Content Include="vendor\vue\vue.js" />
+    <Content Include="vendor\vue\vue.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\CRUD.cs" />
+    <Compile Include="BLL\Entry.cs" />
+    <Compile Include="BLL\SI31.cs" />
+    <Compile Include="BLL\SI32.cs" />
+    <Compile Include="Common\DBFactory.cs" />
+    <Compile Include="Common\DbUtil.cs" />
+    <Compile Include="Common\Helper.cs" />
+    <Compile Include="Common\Runtime.cs" />
+    <Compile Include="gear.ashx.cs">
+      <DependentUpon>gear.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\M_Application_Line.cs" />
+    <Compile Include="Model\M_PONE_LM_LEASE.cs" />
+    <Compile Include="Model\M_Receipt.cs" />
+    <Compile Include="Model\M_Sys_Log.cs" />
+    <Compile Include="Model\M_Sys_Login_Account.cs" />
+    <Compile Include="Model\M_Sys_Login_Lease.cs" />
+    <Compile Include="Model\M_Sys_Login_System.cs" />
+    <Compile Include="Model\M_Sys_Users_Group_Lease.cs" />
+    <Compile Include="Model\M_T_Feedback.cs" />
+    <Compile Include="Model\M_T_Feedback_Res.cs" />
+    <Compile Include="Model\M_T_Feedback_Type.cs" />
+    <Compile Include="Model\M_T_Notice.cs" />
+    <Compile Include="Model\M_T_PAYMENT.cs" />
+    <Compile Include="Model\M_T_PAYMENT_INFO.cs" />
+    <Compile Include="Model\M_T_STATEMENT_DATE.cs" />
+    <Compile Include="Model\M_T_STATEMENT_DATE_EXCEPTION.cs" />
+    <Compile Include="Model\RNR.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gear.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vendor\bootstrap-4.3.1\css\bootstrap-grid.css.map" />
+    <None Include="vendor\bootstrap-4.3.1\css\bootstrap-grid.min.css.map" />
+    <None Include="vendor\bootstrap-4.3.1\css\bootstrap-reboot.css.map" />
+    <None Include="vendor\bootstrap-4.3.1\css\bootstrap-reboot.min.css.map" />
+    <None Include="vendor\bootstrap-4.3.1\css\bootstrap.css.map" />
+    <None Include="vendor\bootstrap-4.3.1\css\bootstrap.min.css.map" />
+    <None Include="vendor\bootstrap-4.3.1\js\bootstrap.bundle.js.map" />
+    <None Include="vendor\bootstrap-4.3.1\js\bootstrap.bundle.min.js.map" />
+    <None Include="vendor\bootstrap-4.3.1\js\bootstrap.js.map" />
+    <None Include="vendor\bootstrap-4.3.1\js\bootstrap.min.js.map" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52592</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/POneIntf</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

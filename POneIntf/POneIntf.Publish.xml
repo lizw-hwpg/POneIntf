@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="D:\Users\tonny.peng\Documents\Visual Studio 2010\Projects\POneIntf\Pub" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="配置文件1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="vendor/bootstrap-4.3.1/css/bootstrap.css" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="vendor/vue/vue.min.js" publishTime="02/21/2019 14:06:20" />
+    <file relUrl="bin/POneIntf.dll" publishTime="05/23/2019 17:47:08" />
+    <file relUrl="vendor/bootstrap-4.3.1/js/bootstrap.bundle.js" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="vendor/bootstrap-4.3.1/css/bootstrap-grid.min.css" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="vendor/bootstrap-4.3.1/js/bootstrap.js" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="bin/Oracle.ManagedDataAccess.dll" publishTime="08/11/2014 14:52:14" />
+    <file relUrl="vendor/bootstrap-4.3.1/css/bootstrap-grid.css" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="vendor/bootstrap-4.3.1/css/bootstrap-reboot.min.css" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="Web.config" publishTime="05/23/2019 17:50:15" />
+    <file relUrl="vendor/bootstrap-4.3.1/css/bootstrap-reboot.css" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="vendor/bootstrap-4.3.1/css/bootstrap.min.css" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="vendor/vue/vue-resource.min.js" publishTime="02/25/2019 18:15:31" />
+    <file relUrl="vendor/bootstrap-4.3.1/js/bootstrap.bundle.min.js" publishTime="02/13/2019 08:01:40" />
+    <file relUrl="vendor/vue/vue.js" publishTime="02/21/2019 14:06:20" />
+    <file relUrl="gear.ashx" publishTime="05/17/2019 16:08:49" />
+    <file relUrl="bin/POneIntf.pdb" publishTime="05/23/2019 17:47:08" />
+    <file relUrl="vendor/jquery-1.12.4.js" publishTime="06/06/2017 17:29:26" />
+    <file relUrl="demo.html" publishTime="05/23/2019 17:24:53" />
+    <file relUrl="vendor/bootstrap-4.3.1/js/bootstrap.min.js" publishTime="02/13/2019 08:01:40" />
+  </publishProfile>
+</publishData>

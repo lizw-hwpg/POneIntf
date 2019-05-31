@@ -1,0 +1,6 @@
+d:\Users\tonny.peng\Documents\Visual Studio 2010\Projects\POneIntf\POneIntf\bin\POneIntf.dll
+d:\Users\tonny.peng\Documents\Visual Studio 2010\Projects\POneIntf\POneIntf\bin\POneIntf.pdb
+d:\Users\tonny.peng\Documents\Visual Studio 2010\Projects\POneIntf\POneIntf\bin\Oracle.ManagedDataAccess.dll
+d:\Users\tonny.peng\Documents\Visual Studio 2010\Projects\POneIntf\POneIntf\obj\Debug\ResolveAssemblyReference.cache
+d:\Users\tonny.peng\Documents\Visual Studio 2010\Projects\POneIntf\POneIntf\obj\Debug\POneIntf.dll
+d:\Users\tonny.peng\Documents\Visual Studio 2010\Projects\POneIntf\POneIntf\obj\Debug\POneIntf.pdb
