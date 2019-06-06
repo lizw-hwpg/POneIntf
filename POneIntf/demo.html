@@ -20,7 +20,13 @@
                 <a class="nav-link" id="advanced-tab" data-toggle="tab" href="#forgetpsw" role="tab" aria-controls="advanced" aria-selected="false">用户忘记密码</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="other-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="other" aria-selected="false">Others</a>
+                <a class="nav-link" id="other-tab" data-toggle="tab" href="#changepsw" role="tab" aria-controls="other" aria-selected="false">用户更改密码</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="A1" data-toggle="tab" href="#getonlinepayinfo" role="tab" aria-controls="other" aria-selected="false">获取待支付账单信息</a>            
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="A2" data-toggle="tab" href="#onlinepayresult" role="tab" aria-controls="other" aria-selected="false">通知后台支付结果</a>            
             </li>
         </ul>
         <div class="tab-content p-2" id="myTabContent">
@@ -60,7 +66,75 @@
                 </div>
                 <button type="button" class="btn btn-primary">3.2_ForgetPsw</button>  
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="other-tab">...</div>
+            <div class="tab-pane fade" id="changepsw" role="tabpanel" aria-labelledby="changepsw-tab">
+                <h3>3.3 Changepsw </h3>
+                <div class="form-group">
+                    <label for="username">UserId</label>
+                    <input type="text" class="form-control param" placeholder="User Id" alt="userid" value="HUHS00639">
+                </div>
+                <div class="form-group">
+                    <label for="logintype">类型</label>
+                    <select name="ddlLoginType" class="form-control param" alt="logintype">
+                        <option value="S">系统管理用户</option>
+                        <option value="L">租约用户</option>
+                        <option value="C" selected="selected">账号用户</option>
+                        <option value="E">查询</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="username">旧密码</label>
+                    <input type="password" class="form-control param" alt="oldpsw">
+                </div>
+                <div class="form-group">
+                    <label for="username">新密码</label>
+                    <input type="password" class="form-control param" alt="newpsw">
+                </div>
+                <button type="button" class="btn btn-primary">Execute</button>  
+            </div>
+            <div class="tab-pane fade" id="getonlinepayinfo" role="tabpanel" aria-labelledby="getonlinepayinfo-tab">
+                <h3>3.4 getonlinepayinfo</h3>
+                <div class="form-group">
+                    <label for="leasenum">租约号</label>
+                    <input type="text" class="form-control param" alt="leasenum" value="HUHS00639">                   
+                </div>
+                <button type="button" class="btn btn-primary">Execute</button>  
+            </div>
+            <div class="tab-pane fade" id="onlinepayresult" role="tabpanel" aria-labelledby="onlinepayresult-tab">
+                <h3>3.5 onlinepayresult</h3>
+                <div class="form-group">
+                    <label for="leasenum">租约号</label>
+                    <input type="text" class="form-control param" alt="leasenum" value="ACBV00178">                   
+                </div>
+                <div class="form-group">
+                    <label for="actualamount">金额</label>
+                    <input type="text" class="form-control param" alt="actualamount" value="3075.3">                   
+                </div>
+                <div class="form-group">
+                    <label for="actualpaytype">类型</label>
+                    <input type="text" class="form-control param" alt="actualpaytype" value="100">                   
+                </div>
+                <div class="form-group">
+                    <label for="actualpaydate">日期</label>
+                    <input type="text" class="form-control param" alt="actualpaydate" value="2018-09-20">                   
+                </div>
+                <div class="form-group">
+                    <label for="receivecompanycode">收款公司</label>
+                    <input type="text" class="form-control param" alt="receivecompanycode" value="5097">                   
+                </div>
+                <div class="form-group">
+                    <label for="currencycode">货币</label>
+                    <input type="text" class="form-control param" alt="currencycode" value="HKD">                   
+                </div>
+                <div class="form-group">
+                    <label for="bankaccount">账号</label>
+                    <input type="text" class="form-control param" alt="bankaccount" value="123456">                   
+                </div> 
+                <div class="form-group">
+                    <label for="customercode">客户编码</label>
+                    <input type="text" class="form-control param" alt="customercode" value="测试客户号">                   
+                </div>
+                <button type="button" class="btn btn-primary">Execute</button>  
+            </div>
         </div>
         <div id="result" class="p-4" style="width:400px;">result</div>
     </div>
@@ -85,7 +159,9 @@
             $("#" + act + " .param").each(function () { //取当前按钮业务下的所有参数
                 data[this.getAttribute("alt")] = this.value;
             });
-            req["data"] = data;           
+            req["data"] = data;
+            console.log(data);
+
             //发起ajax请求，完成业务提交
             $.ajax({
                 url: "gear.ashx?act=" + act,
@@ -94,6 +170,7 @@
                 data: JSON.stringify(req),
                 dataType: "json",
                 success: function (response) {
+                    console.log(response);
                     btnObj.removeAttribute("disabled");
                     if (act == "logincheck") {
 

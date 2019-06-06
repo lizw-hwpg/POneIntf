@@ -21,9 +21,21 @@ namespace POneIntf.BLL
             {
                 return new SI31();
             }
-            else if (act=="forgetpsw")
+            else if (act == "forgetpsw")
             {
                 return new SI32();
+            }
+            else if (act == "changepsw")
+            {
+                return new SI33();
+            }
+            else if (act == "getonlinepayinfo")
+            {
+                return new SI34();
+            }
+            else if (act=="onlinepayresult")
+            {
+                return new SI35();
             }
             else
             {

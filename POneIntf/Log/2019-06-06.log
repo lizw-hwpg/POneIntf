@@ -1,0 +1,4 @@
+[2019-06-06 10:11:26.463] SI34 Request:{"from":"sender","timestamp":"‎2019‎年‎6‎月‎6‎日‎ ‎10‎:‎11‎:‎24","nonce":95,"sign":"","data":{"leasenum":"ACBV00178"}}
+[2019-06-06 10:11:42.780] SI34 Request:{"from":"sender","timestamp":"‎2019‎年‎6‎月‎6‎日‎ ‎10‎:‎11‎:‎42","nonce":44,"sign":"","data":{"leasenum":"HUHS00639"}}
+[2019-06-06 10:12:59.217] SI35 Request:{"from":"sender","timestamp":"‎2019‎年‎6‎月‎6‎日‎ ‎10‎:‎12‎:‎55","nonce":17,"sign":"","data":{"leasenum":"HUHS00639","actualamount":"3075.3","actualpaytype":"100","actualpaydate":"2018-09-20","receivecompanycode":"5097","currencycode":"HKD","bankaccount":"123456","customercode":"测试客户号"}}
+[2019-06-06 10:13:40.089] SI35 Request:{"from":"sender","timestamp":"‎2019‎年‎6‎月‎6‎日‎ ‎10‎:‎13‎:‎36","nonce":63,"sign":"","data":{"leasenum":"HUHS00639","actualamount":"3075.3","actualpaytype":"100","actualpaydate":"2018-09-20","receivecompanycode":"5097","currencycode":"HKD","bankaccount":"123456","customercode":"测试客户号"}}

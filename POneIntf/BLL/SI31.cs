@@ -135,7 +135,7 @@ namespace POneIntf.BLL
                     default:
                         throw new Exception("Unknown login type!");
                 }
-                DataTable dt = biz.Select<Model.M_Sys_Login_Account>(c.m_values);
+                DataTable dt = biz.RetrieveDataTable<Model.M_Sys_Login_Account>(c.Get());
                 biz.Commit();
                 return dt;
             }
@@ -148,17 +148,25 @@ namespace POneIntf.BLL
 
         private List<string> GetGroupLease(int userid)
         {
-            DbUtil_o1 db = new DbUtil_o1(Runtime.OracleConnStrLocal, false);
-            string sql = "select trim(leasenumber) as leasenumber from SYS_USERS_GROUP_LEASE where UserId=" + userid.ToString();
-
-            DataTable dt = db.ExecuteDT(sql, null);
-
-            List<string> leases = new List<string>();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            CRUD biz = new CRUD(DbVendor.Oracle, Runtime.OracleConnStrLocal, false);
+            try
             {
-                leases.Add(dt.Rows[i][0].ToString());
+                string sql = "select trim(leasenumber) as leasenumber from SYS_USERS_GROUP_LEASE where UserId=" + userid.ToString();
+                DataTable dt = biz.ExecuteDataTable(sql);
+                biz.Commit();
+                
+                List<string> leases = new List<string>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    leases.Add(dt.Rows[i][0].ToString());
+                }
+                return leases;
             }
-            return leases;
+            catch (Exception)
+            {
+                biz.Abort();
+                throw;
+            }
         }       
     }
 }

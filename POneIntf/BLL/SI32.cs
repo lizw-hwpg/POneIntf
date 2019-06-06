@@ -68,7 +68,7 @@ namespace POneIntf.BLL
             {
                 Clause c = new Clause();
                 c.Add("trim(LoginName)", this.req.data.userid);                
-                List<Model.M_Sys_Login_Account> etyLst = biz01.Retrieve<Model.M_Sys_Login_Account>(c.m_values);
+                List<Model.M_Sys_Login_Account> etyLst = biz01.Retrieve<Model.M_Sys_Login_Account>(c.Get());
                 biz01.Commit();
 
                 return etyLst;
@@ -100,17 +100,16 @@ namespace POneIntf.BLL
         }
 
         private void Save2Log(Model.M_Sys_Log ety)
-        {
-            CRUD_o1 biz = new CRUD_o1(Runtime.OracleConnStrLocal, true);            
+        {            
+            CRUD biz2 = new CRUD(DbVendor.Oracle, Runtime.OracleConnStrLocal, true);
             try
-            {
-                biz.Create<Model.M_Sys_Log>(ety);
-
-                biz.Commit();
+            {                
+                biz2.Create(ety);             
+                biz2.Commit();
             }
             catch (Exception err)
-            {
-                biz.Abort();
+            {                
+                biz2.Abort();
                 throw err;
             }
         }

@@ -38,9 +38,9 @@ namespace POneIntf.Common
 
     public class DbUtil
     {
-        private System.Data.IDbConnection connection = null;        
-        private System.Data.IDbTransaction tranx = null;
-        private DbVendor vendor;
+        System.Data.IDbConnection connection = null;        
+        System.Data.IDbTransaction tranx = null;
+        DbVendor vendor;
 
         public DbUtil(DbVendor vendor, string connStr, bool openTx)
         {

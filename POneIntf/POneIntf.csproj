@@ -79,13 +79,23 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Bizhub.cs" />
     <Compile Include="BLL\CRUD.cs" />
     <Compile Include="BLL\Entry.cs" />
+    <Compile Include="BLL\PN_COA.cs" />
+    <Compile Include="BLL\PN_COARuleReceipt.cs" />
+    <Compile Include="BLL\PN_Operater.cs" />
+    <Compile Include="BLL\PN_Segment.cs" />
+    <Compile Include="BLL\Receipt.cs" />
     <Compile Include="BLL\SI31.cs" />
     <Compile Include="BLL\SI32.cs" />
+    <Compile Include="BLL\SI33.cs" />
+    <Compile Include="BLL\SI34.cs" />
+    <Compile Include="BLL\SI35.cs" />
     <Compile Include="Common\DBFactory.cs" />
     <Compile Include="Common\DbUtil.cs" />
     <Compile Include="Common\Helper.cs" />
+    <Compile Include="Common\Aid.cs" />
     <Compile Include="Common\Runtime.cs" />
     <Compile Include="gear.ashx.cs">
       <DependentUpon>gear.ashx</DependentUpon>
