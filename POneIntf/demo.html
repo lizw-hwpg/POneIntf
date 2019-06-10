@@ -95,44 +95,68 @@
                 <h3>3.4 getonlinepayinfo</h3>
                 <div class="form-group">
                     <label for="leasenum">租约号</label>
-                    <input type="text" class="form-control param" alt="leasenum" value="HUHS00639">                   
+                    <input type="text" class="form-control param" alt="leasenum" value="ACS400260">                   
                 </div>
                 <button type="button" class="btn btn-primary">Execute</button>  
             </div>
             <div class="tab-pane fade" id="onlinepayresult" role="tabpanel" aria-labelledby="onlinepayresult-tab">
-                <h3>3.5 onlinepayresult</h3>
-                <div class="form-group">
-                    <label for="leasenum">租约号</label>
-                    <input type="text" class="form-control param" alt="leasenum" value="ACBV00178">                   
-                </div>
-                <div class="form-group">
-                    <label for="actualamount">金额</label>
-                    <input type="text" class="form-control param" alt="actualamount" value="3075.3">                   
-                </div>
-                <div class="form-group">
-                    <label for="actualpaytype">类型</label>
-                    <input type="text" class="form-control param" alt="actualpaytype" value="100">                   
-                </div>
-                <div class="form-group">
-                    <label for="actualpaydate">日期</label>
-                    <input type="text" class="form-control param" alt="actualpaydate" value="2018-09-20">                   
-                </div>
-                <div class="form-group">
-                    <label for="receivecompanycode">收款公司</label>
-                    <input type="text" class="form-control param" alt="receivecompanycode" value="5097">                   
-                </div>
-                <div class="form-group">
-                    <label for="currencycode">货币</label>
-                    <input type="text" class="form-control param" alt="currencycode" value="HKD">                   
-                </div>
-                <div class="form-group">
-                    <label for="bankaccount">账号</label>
-                    <input type="text" class="form-control param" alt="bankaccount" value="123456">                   
-                </div> 
-                <div class="form-group">
-                    <label for="customercode">客户编码</label>
-                    <input type="text" class="form-control param" alt="customercode" value="测试客户号">                   
-                </div>
+                <h3>3.5 onlinepayresult</h3>                
+                <div class="d-flex p-2 bd-highlight flex-wrap" style="width:800px">
+                    <div class="form-group">
+                        <label for="leasenum">租约号</label>
+                        <input type="text" class="form-control param" alt="leasenum" value="ACS400260">                   
+                    </div>
+                    <div class="form-group">
+                        <label for="actualamount">金额</label>
+                        <input type="text" class="form-control param" alt="actualamount" value="100">                   
+                    </div>
+                    <div class="form-group">
+                        <label for="actualpaytype">类型</label>
+                        <input type="text" class="form-control param" alt="actualpaytype" value="100">                   
+                    </div>    
+                    <div class="form-group">
+                        <label for="actualpaydate">日期</label>
+                        <input type="text" class="form-control param" alt="actualpaydate" value="2019-06-10">                   
+                    </div>
+                    <div class="form-group">
+                        <label for="receivecompanycode">收款公司</label>
+                        <input type="text" class="form-control param" alt="receivecompanycode" value="5097">                   
+                    </div>
+                    <div class="form-group">
+                        <label for="currencycode">货币</label>
+                        <input type="text" class="form-control param" alt="currencycode" value="HKD">                   
+                    </div>
+                    <div class="form-group">
+                        <label for="bankaccount">账号</label>
+                        <input type="text" class="form-control param" alt="bankaccount" value="004-002-894723-014">                   
+                    </div> 
+                    <div class="form-group">
+                        <label for="customercode">客户编码</label>
+                        <input type="text" class="form-control param" alt="customercode" value="E003745">                   
+                    </div> 
+                    <div class="secondary" alt="actualpayinfo">
+                        <div class="form-group">
+                            <label for="transno">发票号</label>
+                            <input type="text" class="form-control param" alt="transno" value="ACS4-DR-0007704">                   
+                        </div> 
+                        <div class="form-group">
+                            <label for="amount">金额</label>
+                            <input type="text" class="form-control param" alt="amount" value="792">                   
+                        </div>
+                        <div class="form-group">
+                            <label for="actualpay">实际支付</label>
+                            <input type="text" class="form-control param" alt="actualpay" value="100">                   
+                        </div>
+                        <div class="form-group">
+                            <label for="chargecode">收费项</label>
+                            <input type="text" class="form-control param" alt="chargecode" value="AC">                   
+                        </div>
+                        <div class="form-group">
+                            <label for="invoicelinenum">发票行号</label>
+                            <input type="text" class="form-control param" alt="invoicelinenum" value="1">                   
+                        </div>
+                    </div>           
+                </div>                
                 <button type="button" class="btn btn-primary">Execute</button>  
             </div>
         </div>
@@ -142,6 +166,7 @@
     <script type="text/javascript">
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             $("#result").html(""); //清空结果区域
+            console.log(e);
         });
 
         $(".btn").on("click", function () {
@@ -160,6 +185,18 @@
                 data[this.getAttribute("alt")] = this.value;
             });
             req["data"] = data;
+
+            if ($("#" + act + " .secondary").length > 0) {
+                var key = $("#" + act + " .secondary").attr("alt");
+                var sec2 = {};
+                $("#" + act + " .secondary .param").each(function () { //取secondary业务下的所有参数
+                    sec2[this.getAttribute("alt")] = this.value;
+                });
+
+                var arr = new Array();
+                arr.push(sec2);
+                req.data[key] = arr;
+            }
             console.log(data);
 
             //发起ajax请求，完成业务提交

@@ -27,13 +27,17 @@ namespace POneIntf.BLL
 
                 /// 0 在本地保存支付信息
                 this.Save();
+
                 /// 1 创建receipt
-                CreateReceipt();
+                M_Receipt r = CreateReceipt();
+
                 /// 2 更新本地支付信息
                 M_T_PAYMENT ety = this.GetPayInfo(etyH.paymentid);
                 ety.status = "1";
                 this.UpdatePayInfo(ety);
+
                 /// 3 创建分录
+                this.CreateDisribution(r.RECEIPT_NUMBER, r.RECEIPT_TYPE);  
             }
             catch (Exception)
             {
@@ -141,15 +145,16 @@ namespace POneIntf.BLL
             }
         }
 
-        private void CreateReceipt()
+        private M_Receipt CreateReceipt()
         {
             CRUD dbiz=new CRUD(DbVendor.Oracle,Runtime.OracleConnStr,true);
             try
             {
                 Receipt r = new Receipt(dbiz);
-                r.Create(this.req.data);
-                
+                r.Create(this.req.data);                
                 dbiz.Commit();
+
+                return r.ety;
             }
             catch (Exception)
             {

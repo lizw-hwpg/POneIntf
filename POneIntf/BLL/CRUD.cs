@@ -35,63 +35,19 @@ namespace POneIntf.BLL
         /// <returns></returns>
         public int Create<T>(T ety)
         {
-            string cols = "";
-            string vals = "";
             try
             {
+                string sql="";
                 FieldInfo[] fis = ety.GetType().GetFields();
-                string sql = "";
-                sql += "insert into " + ety.GetType().GetField("TableName").GetValue(ety).ToString();
-
-                foreach (FieldInfo fi in fis)
+                if (fis.Length > 0)
                 {
-                    /// 生成字段列表
-                    if (fi.Name == "TableName")
-                        continue;
-
-                    if (Type.GetTypeCode(fi.FieldType) == TypeCode.DateTime)
-                    {
-                        DateTime dObj = (DateTime)fi.GetValue(ety);
-                        if (dObj.Year == 1)
-                            continue;
-                    }
-                    cols += fi.Name + ",";
-
-                    /// 生成值列表
-                    switch (Type.GetTypeCode(fi.FieldType))
-                    {
-                        case TypeCode.Boolean:
-                            break;
-                        case TypeCode.DateTime:
-                            if (fi.GetValue(ety) != null || fi.GetValue(ety) != DBNull.Value)
-                            {
-                                DateTime dObj = (DateTime)fi.GetValue(ety);
-                                if (dObj.Year != 1) //如果不等1说明不是默认值，需要赋值，否则不需要
-                                {
-                                    vals += "to_date('" + Helper.DateFmt19(dObj) + "','yyyy-mm-dd hh24:mi:ss'),";
-                                }
-                            }
-                            break;
-                        case TypeCode.Decimal:
-                        case TypeCode.Double:
-                        case TypeCode.Int16:
-                        case TypeCode.Int32:
-                        case TypeCode.Int64:
-                        case TypeCode.SByte:
-                        case TypeCode.Single:
-                        case TypeCode.UInt16:
-                        case TypeCode.UInt32:
-                        case TypeCode.UInt64:
-                            vals += Helper.DbNull2Dec(fi.GetValue(ety)).ToString() + ",";
-                            break;
-                        default:
-                            vals += "'" + Helper.DbNull2Str(fi.GetValue(ety)) + "',";
-                            break;
-                    }
+                    sql = this.GetCreateSqlByFields<T>(fis, ety);
                 }
-                cols = cols.Substring(0, cols.Length - 1);
-                vals = vals.Substring(0, vals.Length - 1);
-                sql += "(" + cols + ")" + " values (" + vals + ")";
+                else
+                {
+                    PropertyInfo[] pis=ety.GetType().GetProperties();
+                    sql = this.GetCreateSqlByProps<T>(pis, ety);
+                }               
                 int cnt = this.ExecuteNonQuery(sql);
                 return cnt;
             }
@@ -99,6 +55,124 @@ namespace POneIntf.BLL
             {
                 throw err;
             }
+        }
+
+        private string GetCreateSqlByFields<T>(FieldInfo[] fis,T ety)
+        {
+            string sql = "";
+            sql += "insert into " + ety.GetType().GetField("TableName").GetValue(ety).ToString();
+          
+            string cols = "";
+            string vals = "";
+             foreach (FieldInfo fi in fis)
+            {
+                /// 生成字段列表
+                if (fi.Name == "TableName")
+                    continue;
+
+                if (Type.GetTypeCode(fi.FieldType) == TypeCode.DateTime)
+                {
+                    DateTime dObj = (DateTime)fi.GetValue(ety);
+                    if (dObj.Year == 1)
+                        continue;
+                }
+                cols += fi.Name + ",";
+
+                /// 生成值列表
+                switch (Type.GetTypeCode(fi.FieldType))
+                {
+                    case TypeCode.Boolean:
+                        break;
+                    case TypeCode.DateTime:
+                        if (fi.GetValue(ety) != null || fi.GetValue(ety) != DBNull.Value)
+                        {
+                            DateTime dObj = (DateTime)fi.GetValue(ety);
+                            if (dObj.Year != 1) //如果不等1说明不是默认值，需要赋值，否则不需要
+                            {
+                                vals += "to_date('" + Helper.DateFmt19(dObj) + "','yyyy-mm-dd hh24:mi:ss'),";
+                            }
+                        }
+                        break;
+                    case TypeCode.Decimal:
+                    case TypeCode.Double:
+                    case TypeCode.Int16:
+                    case TypeCode.Int32:
+                    case TypeCode.Int64:
+                    case TypeCode.SByte:
+                    case TypeCode.Single:
+                    case TypeCode.UInt16:
+                    case TypeCode.UInt32:
+                    case TypeCode.UInt64:
+                        vals += Helper.DbNull2Dec(fi.GetValue(ety)).ToString() + ",";
+                        break;
+                    default:
+                        vals += "'" + Helper.DbNull2Str(fi.GetValue(ety)) + "',";
+                        break;
+                }
+            }
+            cols = cols.Substring(0, cols.Length - 1);
+            vals = vals.Substring(0, vals.Length - 1);
+            sql += "(" + cols + ")" + " values (" + vals + ")";
+            return sql;
+        }
+
+        private string GetCreateSqlByProps<T>(PropertyInfo[] pis, T ety)
+        {
+            string sql = "";
+            sql += "insert into " + ety.GetType().GetField("TableName").GetValue(ety).ToString();
+
+            string cols = "";
+            string vals = "";
+            foreach (PropertyInfo pi in pis)
+            {
+                /// 生成字段列表
+                if (pi.Name == "TableName")
+                    continue;
+
+                if (Type.GetTypeCode(pi.PropertyType) == TypeCode.DateTime)
+                {
+                    DateTime dObj = (DateTime)pi.GetValue(ety,null);
+                    if (dObj.Year == 1)
+                        continue;
+                }
+                cols += pi.Name + ",";
+
+                /// 生成值列表
+                switch (Type.GetTypeCode(pi.PropertyType))
+                {
+                    case TypeCode.Boolean:
+                        break;
+                    case TypeCode.DateTime:
+                        if (pi.GetValue(ety, null) != null || pi.GetValue(ety,null) != DBNull.Value)
+                        {
+                            DateTime dObj = (DateTime)pi.GetValue(ety, null);
+                            if (dObj.Year != 1) //如果不等1说明不是默认值，需要赋值，否则不需要
+                            {
+                                vals += "to_date('" + Helper.DateFmt19(dObj) + "','yyyy-mm-dd hh24:mi:ss'),";
+                            }
+                        }
+                        break;
+                    case TypeCode.Decimal:
+                    case TypeCode.Double:
+                    case TypeCode.Int16:
+                    case TypeCode.Int32:
+                    case TypeCode.Int64:
+                    case TypeCode.SByte:
+                    case TypeCode.Single:
+                    case TypeCode.UInt16:
+                    case TypeCode.UInt32:
+                    case TypeCode.UInt64:
+                        vals += Helper.DbNull2Dec(pi.GetValue(ety,null)).ToString() + ",";
+                        break;
+                    default:
+                        vals += "'" + Helper.DbNull2Str(pi.GetValue(ety,null)) + "',";
+                        break;
+                }
+            }
+            cols = cols.Substring(0, cols.Length - 1);
+            vals = vals.Substring(0, vals.Length - 1);
+            sql += "(" + cols + ")" + " values (" + vals + ")";
+            return sql;
         }
 
         /// <summary>
@@ -127,6 +201,9 @@ namespace POneIntf.BLL
                             break;
                         case TypeCode.DateTime:
                             fi.SetValue(ety, reader[fi.Name]);
+                            break;
+                        case TypeCode.Double:
+                            fi.SetValue(ety, Convert.ToDouble(reader[fi.Name]));
                             break;
                         case TypeCode.Decimal:
                             fi.SetValue(ety, Convert.ToDecimal(reader[fi.Name]));

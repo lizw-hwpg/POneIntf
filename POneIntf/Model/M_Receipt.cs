@@ -14,6 +14,8 @@ public class M_Receipt
 		// TODO: Add constructor logic here
 		//
 	}
+    public const string TableName = "T_Payment";
+
     #region Model
     private string _post_status;
     private string _receipt_date;
